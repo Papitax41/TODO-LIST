@@ -1,0 +1,60 @@
+Descargar apps:
+-Xampp (dejar que se instale por defecto)
+-Visual studio code
+-Mysql (descargar con: usuario: root y contraseña: 123456)
+----------------------------------
+Abrir: Visual studio code
+Descargar extensiones:
+-PHP Server
+-PHP Namespace Resolver
+-PHP IntelliSense
+-PHP Intelephense
+-PHP Extension Pack
+-PHP Debug
+-Material Icon Theme
+-Luan's PHP Snippets
+-HTML Snippets
+-HTML CSS Support
+-Format HTML in PHP
+-Emmet Keybindings
+----------------------------------------------------------------------------------
+Despues: 
+-abrir Xampp -> ejecutar apache y mysql (si te aparece error no importa, deja abierto el Xampp)
+-abrir Visual studio code -> File -> preferences -> settings -> user -> Extensions
+-buscamos esto: "C_Cpp › Default: Custom Configuration Variables
+The value to use in a configuration if customConfigurationVariables is not set, or the values to insert if ${default} is present as a key in
+ customConfigurationVariables."
+-click en "Edit in setting.json"
+-Despues del ultimo ->" }, " y antes del " } "color amarillo, pegar esto: "php.validate.executablePath": "C:\\xampp\\php\\php.exe" (Esto funciona en caso de que esté instalado Xampp en tu disco local c)
+-En caso no este instalado xampp en disco C -> 
+busca el lugar donde se ah instalado entra a las carpetas -> xampp -> php y selecciona php.exe, copia la direccion y haz el anterior paso
+----------------------------------------------------------------------------------------
+-Descargar carpeta de mi repositorio: https://github.com/Papitax41/TODO-LIST
+-Extraer archivo comprimido (rar, zip, lo q prefieras)
+------------------------------------------------------------------
+Despues: 
+- Abrir mysql
+- click en local instance ->usuario: root ->contraseña: 123456
+- click en file -> Open SQL script-> 
+busca la carpeta donde extraiste el archivo comprimido, selecciona y abre el archivo "bd_usuarios.sql"
+- ejecuta la base de datos
+--------------------------------------------------------------------
+Despues:
+-Entrar en visual studio code
+- click en File -> open folder -> selecciona la carpeta TODO LIST(la que extraiste)
+- habre la carpeta y busca el archivo "login.html"
+- dentro del archivo "login.html" dale anticlick y dale click a "PHP Server: Serve proyect"
+- se habrirá el local host, si ejecutaste correctamente la base de datos:
+-------------------------------------------- 
+	-Nombre de usuario: papita
+	-contraseña: 123456
+----------------------------------------------
+- con esto deberias tener acceso a la lista de tareas,
+----------------------------------------------------------------------------
+- Si el usuario y contraseña de tu mysql es distinto
+- entra a la carpeta papita -> php -> conexion.php
+	
+	Cambia los valores dentro de las comillas
+	
+	- $usuario = "root";
+	-$contraseña = "123456";

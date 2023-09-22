@@ -6,8 +6,51 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <title>TASK</title>
+    <style>
+        body {
+            border-radius: 10px;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            border-radius: 10px;
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+        }
+
+        section {
+            margin-top: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        form {
+            display: inline;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
 </head>
-<center>
+
 <body>
     <header>
         <h3>LISTADO DE TAREAS</h3>
@@ -31,7 +74,7 @@
                 $resultadoInsert = mysqli_query($conexion, $sqlInsert);
 
                 if ($resultadoInsert) {
-                    header("Location: $_SERVER[PHP_SELF]"); 
+                    header("Location: $_SERVER[PHP_SELF]");
                     exit();
                 } else {
                     echo "Ocurrió un error " . mysqli_error($conexion);
@@ -40,13 +83,13 @@
 
             // Eliminar tarea
             if (isset($_POST['btnEliminar'])) {
-                $tareaId = $_POST['tareaId']; 
+                $tareaId = $_POST['tareaId'];
 
                 $sqlDelete = "DELETE FROM listas WHERE id = $tareaId AND USUARIO = '$usuario1';";
                 $resultadoDelete = mysqli_query($conexion, $sqlDelete);
 
                 if ($resultadoDelete) {
-                    header("Location: $_SERVER[PHP_SELF]"); 
+                    header("Location: $_SERVER[PHP_SELF]");
                     exit();
                 } else {
                     echo "Ocurrió un error al eliminar la tarea: " . mysqli_error($conexion);
@@ -58,7 +101,7 @@
                 $tareaIdEditar = $_POST['tareaId'];
             }
 
-            // Guardar tarea editada
+            // Guardar tarea editada agregar
             if (isset($_POST['btnGuardar'])) {
                 $nuevaTarea = $_POST['nuevaTarea'];
                 $tareaId = $_POST['tareaId'];
@@ -67,7 +110,7 @@
                 $resultadoUpdate = mysqli_query($conexion, $sqlUpdate);
 
                 if ($resultadoUpdate) {
-                    header("Location: $_SERVER[PHP_SELF]"); 
+                    header("Location: $_SERVER[PHP_SELF]");
                     exit();
                 } else {
                     echo "Ocurrió un error al editar la tarea: " . mysqli_error($conexion);
@@ -86,7 +129,7 @@
             <table>
                 <tr>
                     <td align="left">
-                        <input type="text" name="Tarea" placeholder="Tarea">
+                        <input type="text" name="Tarea" placeholder="Tarea" style="width: 500px;">
                         <input type="submit" name="btnTarea" value="Agregar" class="btn btn-primary">
                     </td>
                 </tr>
@@ -95,15 +138,15 @@
         <table border="0" cellpadding="5" cellspacing="0" width="550" class="table table-hover">
             <table border="0" width="550">
                 <tr>
-                    <td>Tarea</td>
-                    <td>Accion</td>
+                    <td >Tarea</td>
+                    <td style="width: 200px;">Accion</td>
                 </tr>
                 <?php foreach ($resultado as $r) : ?>
                     <tr>
                         <td>
                             <?php if (isset($tareaIdEditar) && $tareaIdEditar == $r['id']) : ?>
                                 <form method="POST">
-                                    <input type="text" name="nuevaTarea" value="<?php echo $r['task']; ?>">
+                                    <input type="text" name="nuevaTarea" style="width: 500px;" value="<?php echo $r['task']; ?>">
                                     <input type="hidden" name="tareaId" value="<?php echo $r['id']; ?>">
                                     <input type="submit" name="btnGuardar" value="Guardar" class="btn btn-success">
                                 </form>
@@ -128,5 +171,5 @@
         <h6>Todos los derechos reservados @2023</h6>
     </footer>
 </body>
-</center>
+
 </html>
