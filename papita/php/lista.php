@@ -22,9 +22,8 @@
             WHERE U.USUARIO = '$usuario1'";
             $resultado = mysqli_query($conexion, $sql);
             $filas = mysqli_num_rows($resultado);
-            echo $filas;
 
-            //agregar tarea
+            // Agregar tarea
             if (isset($_POST['btnTarea'])) {
                 $tarea = $_POST['Tarea'];
 
@@ -38,9 +37,21 @@
                 }
             }
 
-            if ($resultado) {
-                $numero_registros = mysqli_num_rows($resultado);
+            // Eliminar tarea
+            if (isset($_POST['btnEliminar'])) {
+                $tareaId = $_POST['tareaId']; // Asegúrate de que este valor se envíe desde el formulario
 
+                $sqlDelete = "DELETE FROM listas WHERE id = $tareaId AND USUARIO = '$usuario1';";
+                $resultadoDelete = mysqli_query($conexion, $sqlDelete);
+
+                if ($resultadoDelete) {
+                    echo "<script>alert('Tarea eliminada correctamente!!!');</script>";
+                } else {
+                    echo "Ocurrió un error al eliminar la tarea: " . mysqli_error($conexion);
+                }
+            }
+
+            if ($resultado) {
                 echo $usuario1;
             } else {
                 // Manejar el caso en el que la consulta SQL no se ejecute correctamente
@@ -70,8 +81,11 @@
                     <tr>
                         <td><?php echo $r['task']; ?></td>
                         <td>
-                            <input type="submit" name="btnEditar" value="Editar" class="btn btn-primary">
-                            <input type="submit" name="btnEliminar" value="Eliminar" class="btn btn-danger">
+                            <form method="POST">
+                                <input type="hidden" name="tareaId" value="<?php echo $r['id']; ?>">
+                                <input type="submit" name="btnEditar" value="Editar" class="btn btn-primary">
+                                <input type="submit" name="btnEliminar" value="Eliminar" class="btn btn-danger">
+                            </form>
                         </td>
                     </tr>
                 <?php endforeach; ?>
